@@ -19,7 +19,7 @@
   <!-- start of content area -->
 
   <div id="tardyModule" class="tabs">
-    <ul>
+    <ul class="shown_tabs">
       <li><a id="kiosk_main" href="#tardyMain">Tardy Entry</a></li>
       <li><a id="kiosk_history_tab" href="#tardyHistory">Kiosk History</a></li>
       <li><a href="#tardySettings">Setup</a></li>
@@ -223,7 +223,7 @@
               <input ng-model="vm.settings.footer" class="long" type="text"/>
             </td>
           </tr>
-          <tr>
+          <tr hidden>
             <td rowspan="2">
               <label>Default Comment</label>
             </td>
@@ -237,7 +237,7 @@
               <input ng-model="vm.settings.disable_comment" type="checkbox"/>
             </td>
           </tr>
-          <tr>
+          <tr hidden>
             <td>
               <label>Disable Comment on Tardy Slip</label>
             </td>
@@ -251,6 +251,7 @@
             <button ng-click="vm.testPrint()">Test Print</button>
             <button ng-click="vm.save()">Save Settings</button>
           </div>
+<div hidden>
           <table>
           <tr>
             <th colspan="4">Temp User Override Settings for ~[tlist_sql;SELECT lastfirst FROM USERS WHERE dcid=~[x:users_dcid]]~(name)[/tlist_sql]</th>
@@ -295,9 +296,12 @@
             </td>
           </tr>
         </table>
+</div>
+<div hidden>
         <div class="button-row">
           <button ng-click="vm.clearTempSettings()">Clear Temp User Settings</button>
         </div>
+</div>
       </div>
     </div>
   </div>
@@ -305,6 +309,9 @@
   <!-- end of content area -->
   ~[wc:admin_footer_css]
   <script>
+    require.config({
+      urlArgs: 'v=1.1.20'
+    });
     require([
     'angular',
     'tardyKiosk/tardyModule',
